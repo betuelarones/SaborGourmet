@@ -1,4 +1,4 @@
 package com.tecsup.semana12.service;
 
-public class DetallePedidoService {
+public interface DetallePedidoService {
 }

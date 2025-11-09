@@ -1,7 +1,7 @@
 package com.tecsup.semana12.controller;
 
 import com.tecsup.semana12.model.Cliente;
-import com.tecsup.semana12.service.ClienteService;
+import com.tecsup.semana12.service.ClienteServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +12,7 @@ import java.util.List;
 @RequestMapping("/api/clientes")
 public class ClienteController {
     @Autowired
-    private ClienteService service;
+    private ClienteServiceImpl service;
 
     @PostMapping
     public ResponseEntity<Cliente> crear(@RequestBody Cliente cliente) {

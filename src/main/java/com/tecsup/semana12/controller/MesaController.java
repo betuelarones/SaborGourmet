@@ -1,7 +1,7 @@
 package com.tecsup.semana12.controller;
 
 import com.tecsup.semana12.model.Mesa;
-import com.tecsup.semana12.service.MesaService;
+import com.tecsup.semana12.service.MesaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +12,7 @@ import java.util.List;
 @RequestMapping("/api/mesas")
 public class MesaController {
     @Autowired
-    private MesaService service;
+    private MesaServiceImpl service;
 
     @PostMapping("/{id}/asignar")
     public ResponseEntity<Mesa> asignar(@PathVariable Long id) {

@@ -1,4 +1,4 @@
 package com.tecsup.semana12.service;
 
-public class PlatoService {
+public interface PlatoService {
 }
