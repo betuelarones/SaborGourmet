@@ -1,7 +1,9 @@
 package com.tecsup.semana12.controller;
 
 import com.tecsup.semana12.dto.PedidoRequestDTO;
+import com.tecsup.semana12.model.Factura;
 import com.tecsup.semana12.model.Pedido;
+import com.tecsup.semana12.service.FacturaService;
 import com.tecsup.semana12.service.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +16,8 @@ public class PedidoController {
 
     @Autowired
     private PedidoService pedidoService;
+    @Autowired
+    private FacturaService facturaService;
 
     // ---
     // Endpoint para RF7: Registrar un nuevo pedido
@@ -54,5 +58,18 @@ public class PedidoController {
     @GetMapping("/{id}")
     public Pedido getPedidoPorId(@PathVariable Long id) {
         return pedidoService.obtenerPedidoPorId(id);
+    }
+
+    // ---
+    @PostMapping("/{id}/pagar")
+    public Factura pagarPedido(@PathVariable Long id, @RequestBody PagoDTO pagoDTO) {
+        return facturaService.generarFactura(id, pagoDTO.getMetodoPago());
+    }
+
+    // DTO simple para recibir el método de pago (puedes crear esta clase en 'dto')
+    static class PagoDTO {
+        private String metodoPago;
+        public String getMetodoPago() { return metodoPago; }
+        public void setMetodoPago(String metodoPago) { this.metodoPago = metodoPago; }
     }
 }

@@ -21,6 +21,7 @@ public class DetallePedido {
     private Integer cantidad;
     private BigDecimal subtotalFactura;
 
+   private  BigDecimal subtotal;
     public Long getIdDetallePedido() {
         return idDetallePedido;
     }
@@ -70,5 +71,12 @@ public class DetallePedido {
                 ", cantidad=" + cantidad +
                 ", subtotalFactura=" + subtotalFactura +
                 '}';
+    }
+
+    public BigDecimal getSubtotal() {
+        return subtotal;
+    }
+    public void setSubtotal (BigDecimal subtotal) {
+        this.subtotal = subtotal;
     }
 }
