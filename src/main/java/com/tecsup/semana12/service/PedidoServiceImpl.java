@@ -60,12 +60,16 @@ public class PedidoServiceImpl implements PedidoService {
             detalle.setPedido(pedidoGuardado);
             detalle.setPlato(plato);
             detalle.setCantidad(detalleDTO.getCantidad());
+            Double precioPlato = plato.getPrecio();
+            Integer cantidad = detalleDTO.getCantidad();
 
-            // Calcular subtotal
-            double subtotal;
-            subtotal =  plato.getPrecio() * detalleDTO.getCantidad();
-            detalle.setSubtotalFactura(BigDecimal.valueOf(subtotal));
+            BigDecimal subtotal = BigDecimal.ZERO;
 
+            if (precioPlato != null && cantidad != null) {
+                BigDecimal precioBD = BigDecimal.valueOf(precioPlato);
+                BigDecimal cantidadBD = BigDecimal.valueOf(cantidad);
+                subtotal = precioBD.multiply(cantidadBD);
+            }
             detallePedidoRepository.save(detalle);
         }
 
@@ -105,7 +109,7 @@ public class PedidoServiceImpl implements PedidoService {
     public List<Pedido> listarPedidosPendientes() {
         // Buscamos pedidos "pendientes" y "en preparación"
         List<String> estados = Arrays.asList("pendiente", "en preparación");
-        return pedidoRepository.findByEstado(estados);
+        return pedidoRepository.findByEstadoIn(estados);
     }
 
     // --- Métodos privados de Lógica de Negocio ---
@@ -120,17 +124,14 @@ public class PedidoServiceImpl implements PedidoService {
             Plato plato = detalle.getPlato();
             int cantidadPedida = detalle.getCantidad();
 
-            // 1. Obtener la "receta" (lista de PlatoInsumo)
             List<PlatoInsumo> receta = platoInsumoRepository.findByPlato(plato);
 
             for (PlatoInsumo ingrediente : receta) {
                 Insumo insumo = ingrediente.getInsumo();
                 double cantidadUsadaPorPlato = ingrediente.getCantidadUsada();
 
-                // 2. Calcular el total a descontar
                 double totalADescontar = cantidadUsadaPorPlato * cantidadPedida;
 
-                // 3. Actualizar el Insumo en la BD
                 Insumo insumoBD = insumoRepository.findById(insumo.getIdInsumo())
                         .orElseThrow(() -> new RuntimeException("Insumo no encontrado"));
 

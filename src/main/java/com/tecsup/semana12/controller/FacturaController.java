@@ -18,13 +18,11 @@ public class FacturaController {
     @Autowired
     private FacturaService facturaService;
 
-    // Endpoint para consultar todas las facturas
     @GetMapping
     public List<Factura> listarFacturas() {
         return facturaService.listarTodasLasFacturas();
     }
 
-    // Endpoint para consultar una factura específica
     @GetMapping("/{id}")
     public Factura obtenerFactura(@PathVariable Long id) {
         return facturaService.obtenerFacturaPorId(id);

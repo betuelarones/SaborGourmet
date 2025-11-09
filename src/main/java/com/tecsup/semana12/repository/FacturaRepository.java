@@ -11,12 +11,12 @@ import java.util.List;
 
 public interface FacturaRepository extends JpaRepository<Factura,Long> {
     // ---
-    @Query("SELECT NEW com.tecsup.semana12.dto.ReporteVentasDTO(FUNC('DATE', f.fechaEmision), SUM(f.total)) " +
+    @Query("SELECT NEW com.tecsup.semana12.dto.ReporteVentasDTO(CAST(f.fechaEmision AS DATE), SUM(f.total)) " +
             "FROM Factura f " +
             "WHERE f.fechaEmision BETWEEN :inicio AND :fin " +
-            "AND f.estado = 'pagado' " + // Solo contamos facturas pagadas
-            "GROUP BY FUNC('DATE', f.fechaEmision) " +
-            "ORDER BY FUNC('DATE', f.fechaEmision) ASC")
+            "AND f.estado = 'pagado' " +
+            "GROUP BY CAST(f.fechaEmision AS DATE) " + // También cambia aquí
+            "ORDER BY CAST(f.fechaEmision AS DATE) ASC") // Y aquí
     List<ReporteVentasDTO> findVentasDiariasPorFecha(
             @Param("inicio") LocalDateTime inicio,
             @Param("fin") LocalDateTime fin

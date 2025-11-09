@@ -1,4 +1,9 @@
-package com.tecsup.semana12.service;
+    package com.tecsup.semana12.service;
 
-public interface CompraService {
-}
+    import com.tecsup.semana12.dto.CompraRequestDTO;
+    import com.tecsup.semana12.model.Compra;
+
+    public interface CompraService {
+
+        Compra registrarCompra(CompraRequestDTO compraDTO);
+    }

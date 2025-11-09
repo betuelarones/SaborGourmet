@@ -46,9 +46,9 @@ public class FacturaServiceImpl implements FacturaService {
 
         // 2. Calcular el total (CORREGIDO)
         BigDecimal totalCalculado = detallesDelPedido.stream()
-                // ¡CAMBIO AQUÍ! Simplemente obtenemos el subtotal (que ya es BigDecimal)
                 .map(DetallePedido::getSubtotal)
-                .reduce(BigDecimal.ZERO, BigDecimal::add); // Suma segura de BigDecimal
+                .filter(java.util.Objects::nonNull)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
 
         // 3. Crear la Factura principal
         Factura factura = new Factura();
@@ -70,8 +70,9 @@ public class FacturaServiceImpl implements FacturaService {
             detalleFactura.setConcepto(concepto);
 
             // ¡CAMBIO AQUÍ! Asignación directa
-            detalleFactura.setMonto(detallePedido.getSubtotal()); // Ambos ya son BigDecimal
-
+            detalleFactura.setMonto(detallePedido.getSubtotal());
+            BigDecimal monto = detallePedido.getSubtotal();
+            detalleFactura.setMonto( (monto == null) ? BigDecimal.ZERO : monto );
             detalleFacturaRepository.save(detalleFactura);
         }
 

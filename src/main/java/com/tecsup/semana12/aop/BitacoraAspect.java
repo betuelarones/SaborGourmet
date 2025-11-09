@@ -32,7 +32,7 @@ public class BitacoraAspect {
     public void metodosDeServicio() {}
 
     // 2. Definir el "Advice": Qué código se va a ejecutar.
-    // @AfterReturning: Se ejecuta DESPUÉS de que el método termine exitosamente.
+    // @AfterReturning: Se ejecuta DESPUÉS de que el metodo termine exitosamente.
     @AfterReturning(pointcut = "metodosDeServicio()")
     public void registrarEnBitacora(JoinPoint joinPoint) {
 
