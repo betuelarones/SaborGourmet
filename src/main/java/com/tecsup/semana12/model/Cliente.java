@@ -15,7 +15,7 @@ public class Cliente {
     private String apellidos;
     private String telefono;
     private String correo;
-    private Boolean activo;
+    private Boolean estado;
 
     public Cliente() {
     }
@@ -68,12 +68,12 @@ public class Cliente {
         this.correo = correo;
     }
 
-    public Boolean getActivo() {
-        return activo;
+    public Boolean getEstado() {
+        return estado;
     }
 
-    public void setActivo(Boolean activo) {
-        this.activo = activo;
+    public void setEstado(Boolean estado) {
+        this.estado = estado;
     }
 
     @Override
@@ -85,7 +85,7 @@ public class Cliente {
                 ", apellidos='" + apellidos + '\'' +
                 ", telefono='" + telefono + '\'' +
                 ", correo='" + correo + '\'' +
-                ", activo=" + activo +
+                ", estado=" + estado +
                 '}';
     }
 }
