@@ -5,7 +5,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-import java.math.BigDecimal;
 
 @Entity
 public class Plato {
@@ -14,7 +13,7 @@ public class Plato {
     private Long idPlato;
     private String nombre;
     private String tipo;
-    private BigDecimal precio;
+    private Double precio;
     private String descripcion;
     private Boolean activo;
 
@@ -42,11 +41,11 @@ public class Plato {
         this.tipo = tipo;
     }
 
-    public BigDecimal getPrecio() {
+    public Double getPrecio() {
         return precio;
     }
 
-    public void setPrecio(BigDecimal precio) {
+    public void setPrecio(Double precio) {
         this.precio = precio;
     }
 
