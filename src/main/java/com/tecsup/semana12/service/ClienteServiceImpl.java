@@ -4,6 +4,7 @@ import com.tecsup.semana12.model.Cliente;
 import com.tecsup.semana12.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -32,6 +33,7 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
+    @Transactional
     public Cliente actualizarCliente(Long id, Cliente clienteActualizado) {
         Cliente clienteExistente = obtenerClientePorId(id); // Reusa el método de buscar
 
@@ -47,13 +49,9 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
+    @Transactional
     public void eliminarCliente(Long id) {
         Cliente clienteExistente = obtenerClientePorId(id);
-        // Opcional: Podrías hacer un "borrado lógico"
-        // clienteExistente.setEstado("inactivo");
-        // clienteRepository.save(clienteExistente);
-
-        // Borrado físico:
         clienteRepository.delete(clienteExistente);
     }
 }

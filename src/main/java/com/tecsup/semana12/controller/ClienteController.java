@@ -5,6 +5,7 @@ import com.tecsup.semana12.service.ClienteService;
 import com.tecsup.semana12.service.ClienteServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,6 +22,7 @@ public class ClienteController {
     // URL: POST /api/clientes
     // ---
     @PostMapping
+    @PreAuthorize("hasAuthority('admin')")
     public Cliente crearCliente(@RequestBody Cliente cliente) {
         return clienteService.registrarCliente(cliente);
     }
@@ -30,6 +32,7 @@ public class ClienteController {
     // URL: GET /api/clientes
     // ---
     @GetMapping
+    @PreAuthorize("hasAnyAuthority('admin', 'mozo')")
     public List<Cliente> listarClientes() {
         return clienteService.listarTodosLosClientes();
     }
@@ -39,6 +42,7 @@ public class ClienteController {
     // URL: GET /api/clientes/5 (ejemplo)
     // ---
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('admin')")
     public Cliente obtenerCliente(@PathVariable Long id) {
         return clienteService.obtenerClientePorId(id);
     }
@@ -48,6 +52,7 @@ public class ClienteController {
     // URL: PUT /api/clientes/5 (ejemplo)
     // ---
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('admin')")
     public Cliente actualizarCliente(@PathVariable Long id, @RequestBody Cliente clienteActualizado) {
         return clienteService.actualizarCliente(id, clienteActualizado);
     }
@@ -57,6 +62,7 @@ public class ClienteController {
     // URL: DELETE /api/clientes/5 (ejemplo)
     // ---
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('admin')")
     public void eliminarCliente(@PathVariable Long id) {
         clienteService.eliminarCliente(id);
     }

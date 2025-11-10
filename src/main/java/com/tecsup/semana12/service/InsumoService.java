@@ -9,7 +9,8 @@ public interface InsumoService {
     List<Insumo> listarInsumos();
     Insumo obtenerInsumoPorId(Long id);
     Insumo actualizarStock(Long id, double cantidadComprada); // Para RF14 (Compras)
-
-    // RF15: Método para verificar y alertar stock bajo
+    Insumo actualizarInsumo(Long id, Insumo insumoActualizado);
+    void eliminarInsumo(Long id);
+    // RF15: Metodo para verificar y alertar stock bajo
     List<Insumo> listarInsumosConStockBajo();
 }

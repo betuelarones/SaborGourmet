@@ -1,6 +1,5 @@
 package com.tecsup.semana12.security;
 
-
 import com.tecsup.semana12.config.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,7 +18,7 @@ import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
-@EnableAspectJAutoProxy // Para tu Bitácora
+@EnableAspectJAutoProxy
 public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
@@ -34,14 +33,14 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(csrf -> csrf.disable())
-                // ---
-                // ¡¡AQUÍ AÑADIMOS EL CORS!!
-                // ---
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
 
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**").permitAll()
-                        .requestMatchers("/api/mesas/**", "/api/pedidos/**").hasAnyAuthority("admin", "cajero", "mozo")
+                        // ---
+                        // ¡¡AQUÍ ESTÁ LA CORRECCIÓN!!
+                        // ---
+                        .requestMatchers("/api/mesas/**", "/api/pedidos/**").hasAnyAuthority("admin", "cajero", "mozo", "cocinero")
                         .requestMatchers("/api/platos/**", "/api/insumos/**", "/api/compras/**", "/api/proveedores/**", "/api/reportes/**").hasAnyAuthority("admin", "cocinero")
                         .anyRequest().authenticated()
                 )
@@ -52,20 +51,15 @@ public class SecurityConfig {
         return http.build();
     }
 
-    // ---
-    // ¡¡Y AQUÍ AÑADIMOS EL BEAN DE CORS!!
-    // ---
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        // La URL de tu frontend Vite
         configuration.setAllowedOrigins(Arrays.asList("http://localhost:5173"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
         configuration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        // Aplica esta configuración a toda tu API
         source.registerCorsConfiguration("/api/**", configuration);
         return source;
     }

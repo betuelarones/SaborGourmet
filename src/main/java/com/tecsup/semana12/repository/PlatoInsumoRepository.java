@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface PlatoInsumoRepository extends JpaRepository<PlatoInsumo, Long> {
     List<PlatoInsumo> findByPlatoIdPlato(Long idPlato);
-
+    boolean existsByInsumo_IdInsumo(Long idInsumo);
     List<PlatoInsumo> findByPlato(Plato plato);
 }

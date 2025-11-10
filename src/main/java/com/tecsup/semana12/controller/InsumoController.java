@@ -3,12 +3,14 @@ package com.tecsup.semana12.controller;
 import com.tecsup.semana12.model.Insumo;
 import com.tecsup.semana12.service.InsumoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/insumos")
+@PreAuthorize("hasAnyAuthority('admin', 'cocinero')")
 public class InsumoController {
     @Autowired
     private InsumoService insumoService;
@@ -28,6 +30,18 @@ public class InsumoController {
         return insumoService.obtenerInsumoPorId(id);
     }
 
+    // (U) Actualizar
+    @PutMapping("/{id}")
+    public Insumo actualizarInsumo(@PathVariable Long id, @RequestBody Insumo insumo) {
+        return insumoService.actualizarInsumo(id, insumo);
+    }
+
+    // (D) Eliminar
+    @DeleteMapping("/{id}")
+    public void eliminarInsumo(@PathVariable Long id) {
+        insumoService.eliminarInsumo(id);
+    }
+
     // ---
     // Endpoint para RF15: Alertas de stock bajo
     // URL: GET /api/insumos/stock-bajo
@@ -36,4 +50,5 @@ public class InsumoController {
     public List<Insumo> getInsumosConStockBajo() {
         return insumoService.listarInsumosConStockBajo();
     }
+
 }

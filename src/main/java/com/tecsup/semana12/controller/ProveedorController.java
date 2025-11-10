@@ -3,12 +3,14 @@ package com.tecsup.semana12.controller;
 import com.tecsup.semana12.model.Proveedor;
 import com.tecsup.semana12.service.ProveedorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/proveedores")
+@PreAuthorize("hasAuthority('admin')")
 public class ProveedorController {
 
     @Autowired
