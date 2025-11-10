@@ -4,6 +4,7 @@ import com.tecsup.semana12.model.Plato;
 import com.tecsup.semana12.model.PlatoInsumo;
 import com.tecsup.semana12.service.PlatoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -52,5 +53,17 @@ public class PlatoController {
         public void setIdInsumo(Long idInsumo) { this.idInsumo = idInsumo; }
         public double getCantidad() { return cantidad; }
         public void setCantidad(double cantidad) { this.cantidad = cantidad; }
+    }
+
+    @PutMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('admin', 'cocinero')")
+    public Plato actualizarPlato(@PathVariable Long id, @RequestBody Plato platoActualizado) {
+        return platoService.actualizarPlato(id, platoActualizado);
+    }
+
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('admin', 'cocinero')")
+    public void eliminarPlato(@PathVariable Long id) {
+        platoService.eliminarPlato(id);
     }
 }

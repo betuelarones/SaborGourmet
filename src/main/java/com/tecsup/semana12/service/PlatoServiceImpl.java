@@ -9,6 +9,7 @@ import com.tecsup.semana12.repository.PlatoInsumoRepository;
 import com.tecsup.semana12.repository.PlatoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -61,5 +62,32 @@ public class PlatoServiceImpl implements PlatoService {
     @Override
     public List<PlatoInsumo> obtenerInsumosPorPlato(Long idPlato) {
         return platoInsumoRepository.findByPlatoIdPlato(idPlato);
+    }
+
+    @Override
+    @Transactional
+    public Plato actualizarPlato(Long id, Plato platoActualizado) {
+        // 1. Busca el plato existente en la BD
+        Plato platoExistente = platoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Plato no encontrado con ID: " + id));
+
+        // 2. Actualiza los campos
+        platoExistente.setNombre(platoActualizado.getNombre());
+        platoExistente.setDescripcion(platoActualizado.getDescripcion());
+        platoExistente.setPrecio(platoActualizado.getPrecio());
+        platoExistente.setTipo(platoActualizado.getTipo());
+        platoExistente.setEstado(platoActualizado.getEstado());
+        // (La receta de insumos se manejaría por separado, si quisiéramos)
+
+        // 3. Guarda el plato actualizado
+        return platoRepository.save(platoExistente);
+    }
+
+    @Override
+    @Transactional
+    public void eliminarPlato(Long id) {
+        Plato plato = platoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Plato no encontrado con ID: " + id));
+        platoRepository.delete(plato);
     }
 }

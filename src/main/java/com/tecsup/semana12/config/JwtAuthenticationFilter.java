@@ -1,5 +1,6 @@
-package com.tecsup.semana12.security;
+package com.tecsup.semana12.config;
 
+import com.tecsup.semana12.security.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

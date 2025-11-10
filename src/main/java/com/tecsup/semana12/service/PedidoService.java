@@ -18,4 +18,6 @@ public interface PedidoService {
     // Métodos de consulta básicos
     List<Pedido> listarTodosLosPedidos();
     Pedido obtenerPedidoPorId(Long id);
+
+    List<Pedido> listarPedidosServidos();
 }

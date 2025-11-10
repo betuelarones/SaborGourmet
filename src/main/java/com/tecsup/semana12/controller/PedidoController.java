@@ -66,6 +66,11 @@ public class PedidoController {
         return facturaService.generarFactura(id, pagoDTO.getMetodoPago());
     }
 
+    @GetMapping("/servidos")
+    public List<Pedido> getPedidosServidos() {
+        return pedidoService.listarPedidosServidos();
+    }
+
     // DTO simple para recibir el método de pago (puedes crear esta clase en 'dto')
     static class PagoDTO {
         private String metodoPago;

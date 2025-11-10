@@ -13,7 +13,7 @@ public interface PlatoService {
 
     // RF5: Asociar insumos a un plato
     PlatoInsumo asociarInsumo(Long idPlato, Long idInsumo, double cantidad);
-
-    // Método para ver la "receta" de un plato
     List<PlatoInsumo> obtenerInsumosPorPlato(Long idPlato);
+    Plato actualizarPlato(Long id, Plato platoActualizado);
+    void eliminarPlato(Long id);
 }

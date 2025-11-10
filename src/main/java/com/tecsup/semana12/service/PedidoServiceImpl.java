@@ -153,4 +153,11 @@ public class PedidoServiceImpl implements PedidoService {
         return pedidoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Pedido no encontrado: " + id));
     }
+
+    @Override
+    public List<Pedido> listarPedidosServidos() {
+        // Buscamos pedidos que solo estén "servidos"
+        List<String> estados = Arrays.asList("servido");
+        return pedidoRepository.findByEstadoIn(estados);
+    }
 }

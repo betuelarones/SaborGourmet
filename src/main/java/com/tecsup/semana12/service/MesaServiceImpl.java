@@ -4,6 +4,7 @@ import com.tecsup.semana12.model.Mesa;
 import com.tecsup.semana12.repository.MesaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -38,6 +39,16 @@ public class MesaServiceImpl implements MesaService {
         mesaRepository.deleteById(id);
     }
 
+    @Override
+    @Transactional
+    public Mesa actualizarMesa(Long id, Mesa mesaActualizada) {
+        Mesa mesaExistente = obtenerMesaPorId(id);
+        mesaExistente.setNumero(mesaActualizada.getNumero());
+        mesaExistente.setCapacidad(mesaActualizada.getCapacidad());
+        mesaExistente.setEstado(mesaActualizada.getEstado());
+        return mesaRepository.save(mesaExistente);
+    }
+
     // --- Implementación de RF2: Asignar y Liberar ---
 
     @Override
@@ -56,8 +67,6 @@ public class MesaServiceImpl implements MesaService {
     @Override
     public Mesa liberarMesa(Long id) {
         Mesa mesa = obtenerMesaPorId(id);
-
-        // Aquí podrías validar que solo mesas "ocupadas" o "reservadas" se liberen
         mesa.setEstado("disponible");
         return mesaRepository.save(mesa);
     }

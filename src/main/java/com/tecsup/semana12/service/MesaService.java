@@ -8,6 +8,7 @@ public interface MesaService {
     Mesa crearMesa(Mesa mesa);
     List<Mesa> listarTodasLasMesas();
     Mesa obtenerMesaPorId(Long id);
+    Mesa actualizarMesa(Long id, Mesa mesaActualizada);
     void eliminarMesa(Long id);
 
     // --- Métodos para RF2: Asignar y liberar ---

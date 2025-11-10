@@ -57,11 +57,11 @@ public class Plato {
         this.descripcion = descripcion;
     }
 
-    public Boolean getActivo() {
+    public Boolean getEstado() {
         return activo;
     }
 
-    public void setActivo(Boolean activo) {
+    public void setEstado(Boolean activo) {
         this.activo = activo;
     }
 
