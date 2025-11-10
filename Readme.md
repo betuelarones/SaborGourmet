@@ -8,6 +8,8 @@ El frontend está desarrollado con React y Vite. El backend utiliza Spring Boot 
 <p align="left">
 	<img alt="React" src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" width="120" style="margin-right:24px" />
 	<img alt="Spring Boot" src="https://upload.wikimedia.org/wikipedia/commons/4/44/Spring_Framework_Logo_2018.svg" width="140" />
+	<img alt="MySQL" src="https://upload.wikimedia.org/wikipedia/en/d/dd/MySQL_logo.svg" width="140" />
+	<img alt="Postman" src="https://upload.wikimedia.org/wikipedia/commons/8/87/Postman_%28software%29_logo.svg" width="140" />
 </p>
 
 ## Tecnologías usadas
@@ -16,10 +18,6 @@ El frontend está desarrollado con React y Vite. El backend utiliza Spring Boot 
 
 Aplicación full‑stack para la gestión de un restaurante gourmet: gestión de productos/insumos, clientes, mesas, pedidos y compras. Está pensada como proyecto educativo/práctico que combina un front-end en React con un back-end en Spring Boot.
 
-![React](https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg)
-![Spring Framework](https://upload.wikimedia.org/wikipedia/commons/4/44/Spring_Framework_Logo_2018.svg)
-![MySQL](https://upload.wikimedia.org/wikipedia/en/d/dd/MySQL_logo.svg)
-![Postman](https://upload.wikimedia.org/wikipedia/commons/8/87/Postman_%28software%29_logo.svg)
 
 ## Resumen
 
