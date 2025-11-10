@@ -213,7 +213,3 @@ Agrega un archivo `LICENSE` en la raíz si deseas publicar bajo una licencia (ej
 
 ----
 Última actualización: 9 de noviembre de 2025
-
-
-----
-Última actualización: 9 de noviembre de 2025
