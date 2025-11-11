@@ -37,13 +37,12 @@ public class SecurityConfig {
 
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**").permitAll()
-                        // ---
-                        // ¡¡AQUÍ ESTÁ LA CORRECCIÓN!!
-                        // ---
+                        .requestMatchers("/api/platos/**").hasAnyAuthority("admin", "cocinero", "mozo")
                         .requestMatchers("/api/mesas/**", "/api/pedidos/**").hasAnyAuthority("admin", "cajero", "mozo", "cocinero")
-                        .requestMatchers("/api/platos/**", "/api/insumos/**", "/api/compras/**", "/api/proveedores/**", "/api/reportes/**").hasAnyAuthority("admin", "cocinero")
+                        .requestMatchers("/api/insumos/**", "/api/compras/**", "/api/proveedores/**", "/api/reportes/**").hasAnyAuthority("admin", "cocinero")
                         .anyRequest().authenticated()
                 )
+
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);

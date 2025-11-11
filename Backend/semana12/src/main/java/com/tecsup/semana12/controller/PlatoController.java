@@ -1,5 +1,6 @@
 package com.tecsup.semana12.controller;
 
+import com.tecsup.semana12.dto.AsociacionDTO;
 import com.tecsup.semana12.model.Plato;
 import com.tecsup.semana12.model.PlatoInsumo;
 import com.tecsup.semana12.service.PlatoService;
@@ -8,6 +9,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 
 @RestController
 @RequestMapping("/api/platos")
@@ -19,6 +21,7 @@ public class PlatoController {
     public Plato crearPlato(@RequestBody Plato plato) {
         return platoService.registrarPlato(plato);
     }
+
 
     @GetMapping
     public List<Plato> listarPlatos() {
@@ -45,15 +48,6 @@ public class PlatoController {
         return platoService.asociarInsumo(idPlato, dto.getIdInsumo(), dto.getCantidad());
     }
 
-    static class AsociacionDTO {
-        private Long idInsumo;
-        private double cantidad;
-        // Getters y Setters
-        public Long getIdInsumo() { return idInsumo; }
-        public void setIdInsumo(Long idInsumo) { this.idInsumo = idInsumo; }
-        public double getCantidad() { return cantidad; }
-        public void setCantidad(double cantidad) { this.cantidad = cantidad; }
-    }
 
     @PutMapping("/{id}")
     @PreAuthorize("hasAnyAuthority('admin', 'cocinero')")

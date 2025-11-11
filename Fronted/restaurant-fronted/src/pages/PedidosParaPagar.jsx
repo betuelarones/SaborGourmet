@@ -1,6 +1,8 @@
 // src/pages/PedidosParaPagar.jsx
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import Dashboard from './Dashboard';
 import apiClient from '../services/apiService';
 import '../css/PedidosParaPagar.css';
 
@@ -8,11 +10,11 @@ function PedidosParaPagar() {
     const [pedidos, setPedidos] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [processingId, setProcessingId] = useState(null);
 
     const fetchPedidosServidos = async () => {
-        setLoading(true);
-        setError(null);
         try {
+            setLoading(true);
             const response = await apiClient.get('/pedidos/servidos');
             setPedidos(response.data);
         } catch (err) {
@@ -28,48 +30,57 @@ function PedidosParaPagar() {
     }, []);
 
     const handlePagarPedido = async (idPedido) => {
+        const confirmacion = window.confirm(
+            '¿Deseas registrar el pago y facturar este pedido?'
+        );
+        if (!confirmacion) return;
+
+        const metodoPago = window.prompt('Ingrese método de pago (efectivo/tarjeta):', 'efectivo');
+        if (!metodoPago) return;
+
+        setProcessingId(idPedido);
         try {
-            const metodoPago = prompt('Método de pago (efectivo, tarjeta):', 'efectivo');
-            if (!metodoPago) return;
-
-            const pagoDTO = { metodoPago };
-            await apiClient.post(`/pedidos/${idPedido}/pagar`, pagoDTO);
-
-            alert('¡Pedido pagado y facturado! La mesa ha sido liberada.');
+            await apiClient.post(`/pedidos/${idPedido}/pagar`, { metodoPago });
+            alert('✅ Pedido pagado correctamente. La mesa ha sido liberada.');
             fetchPedidosServidos();
         } catch (err) {
-            setError('Error al registrar el pago.');
             console.error(err);
+            setError('❌ Ocurrió un error al registrar el pago.');
+        } finally {
+            setProcessingId(null);
         }
     };
-
-    if (loading) return <p>Cargando cuentas...</p>;
 
     return (
         <div className="pedidos-container">
             <div className="pedidos-header">
-                <Link to="/dashboard">← Volver al Dashboard</Link>
-                <h2 className="pedidos-title">Cuentas por Pagar (Caja)</h2>
+                <Link to="/dashboard" className="back-link">
+                    ← Volver al Dashboard
+                </Link>
+                <h2 className="pedidos-title">💰 Cuentas por Pagar</h2>
             </div>
 
+            {loading && <p className="loading-msg">Cargando cuentas...</p>}
             {error && <p className="error-msg">{error}</p>}
 
-            <div className="pedidos-list">
-                {pedidos.length === 0 && !loading && (
-                    <p className="empty-msg">No hay cuentas pendientes de pago.</p>
-                )}
+            {!loading && pedidos.length === 0 && (
+                <p className="empty-msg">No hay cuentas pendientes de pago.</p>
+            )}
 
+            <div className="pedidos-list">
                 {pedidos.map((pedido) => (
                     <div key={pedido.idPedido} className="pedido-card">
-                        <strong>Pedido #{pedido.idPedido} (Mesa #{pedido.mesa.numero})</strong>
-                        <p>Cliente: {pedido.cliente ? pedido.cliente.nombres : 'Consumidor Final'}</p>
-                        <p className="estado">Estado: {pedido.estado}</p>
+                        <h3>Pedido #{pedido.idPedido}</h3>
+                        <p><strong>Mesa:</strong> {pedido.mesa.numero}</p>
+                        <p><strong>Cliente:</strong> {pedido.cliente?.nombres || 'Consumidor Final'}</p>
+                        <p className="estado"><strong>Estado:</strong> {pedido.estado}</p>
 
                         <button
                             className="btn-pagar"
+                            disabled={processingId === pedido.idPedido}
                             onClick={() => handlePagarPedido(pedido.idPedido)}
                         >
-                            Registrar Pago 💵
+                            {processingId === pedido.idPedido ? 'Procesando...' : 'Registrar Pago 💵'}
                         </button>
                     </div>
                 ))}

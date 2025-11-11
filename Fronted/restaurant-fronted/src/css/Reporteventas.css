@@ -1,0 +1,107 @@
+    .reporte-container {
+    padding: 30px;
+    font-family: 'Poppins', sans-serif;
+    color: #222;
+    background-color: #f9fafb;
+    min-height: 100vh;
+}
+
+.reporte-container a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.reporte-container a:hover {
+    color: #0056b3;
+}
+
+.reporte-container h2 {
+    margin-top: 20px;
+    font-size: 1.8rem;
+    color: #1f2937;
+}
+
+.fecha-selector {
+    margin-top: 25px;
+    margin-bottom: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: center;
+    background: white;
+    border-radius: 12px;
+    padding: 15px 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.fecha-selector label {
+    font-weight: 600;
+    margin-right: 6px;
+    color: #374151;
+}
+
+.fecha-selector input {
+    padding: 6px 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.fecha-selector input:focus {
+    border-color: #007bff;
+}
+
+.fecha-selector button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.fecha-selector button:hover {
+    background-color: #0056b3;
+}
+
+.reporte-table {
+    width: 60%;
+    margin-top: 25px;
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.reporte-table th, .reporte-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.reporte-table th {
+    background-color: #007bff;
+    color: white;
+    font-weight: 600;
+}
+
+.reporte-table tr:hover {
+    background-color: #f3f4f6;
+}
+
+.reporte-table tfoot tr {
+    background-color: #e0e7ff;
+    font-weight: 700;
+}
+
+.error-msg {
+    color: #dc2626;
+    font-weight: 500;
+    margin-top: 15px;
+}

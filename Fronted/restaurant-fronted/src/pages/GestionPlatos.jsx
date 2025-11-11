@@ -28,7 +28,7 @@ function GestionPlatos() {
     const handleEliminar = async (idPlato) => {
         if (window.confirm('¿Estás seguro de que deseas eliminar este plato?')) {
             try {
-                await apiClient.delete(`/platos/${idPlato}`);
+                await apiClient.delete('/platos/${idPlato}');
                 alert('Plato eliminado con éxito.');
                 setPlatos(platos.filter(plato => plato.idPlato !== idPlato));
             } catch (err) {

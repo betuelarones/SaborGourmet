@@ -1,0 +1,146 @@
+/* 📦 src/css/RegistrarCompra.css */
+
+.registrar-compra-container {
+    padding: 30px;
+    background-color: #f9fafb;
+    min-height: 100vh;
+    font-family: 'Poppins', sans-serif;
+}
+
+.registrar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+
+.registrar-header a {
+    text-decoration: none;
+    color: #2563eb;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.registrar-header a:hover {
+    color: #1d4ed8;
+}
+
+.registrar-title {
+    font-size: 26px;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.section {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e5e7eb;
+}
+
+.section h3 {
+    font-size: 20px;
+    color: #1e3a8a;
+    margin-bottom: 10px;
+}
+
+select,
+input[type="number"] {
+    padding: 8px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+select:focus,
+input[type="number"]:focus {
+    border-color: #2563eb;
+}
+
+.add-item-container {
+    display: flex;
+    gap: 15px;
+    align-items: flex-end;
+    margin-top: 10px;
+}
+
+.add-item-container div {
+    display: flex;
+    flex-direction: column;
+}
+
+.add-item-container label {
+    font-weight: 500;
+    color: #334155;
+    margin-bottom: 5px;
+}
+
+.btn-agregar {
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-agregar:hover {
+    background-color: #1d4ed8;
+    transform: translateY(-2px);
+}
+
+.compra-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.compra-table th,
+.compra-table td {
+    border: 1px solid #e2e8f0;
+    padding: 10px;
+    text-align: center;
+}
+
+.compra-table th {
+    background-color: #eff6ff;
+    color: #1e3a8a;
+    font-weight: 600;
+}
+
+.compra-table tfoot td {
+    font-weight: bold;
+    background-color: #f1f5f9;
+}
+
+.error-msg {
+    color: #dc2626;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+
+.btn-confirmar {
+    background-color: #16a34a;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 20px;
+    font-size: 1.1em;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-confirmar:hover {
+    background-color: #15803d;
+    transform: translateY(-2px);
+}
+
+.btn-confirmar:disabled {
+    background-color: #42b046;
+    cursor: not-allowed;
+}
