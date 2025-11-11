@@ -1,0 +1,92 @@
+.editar-proveedor-container {
+    max-width: 520px;
+    margin: 50px auto;
+    padding: 25px;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    font-family: 'Inter', sans-serif;
+}
+
+.editar-proveedor-back {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.editar-proveedor-back:hover {
+    color: #0056b3;
+}
+
+.editar-proveedor-title {
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 25px;
+    color: #333;
+}
+
+.editar-proveedor-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.editar-proveedor-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.editar-proveedor-label {
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.editar-proveedor-input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 15px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.editar-proveedor-input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.25);
+}
+
+.editar-proveedor-button {
+    margin-top: 10px;
+    padding: 12px;
+    background: #28a745;
+    color: white;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.1s;
+}
+
+.editar-proveedor-button:hover {
+    background: #218838;
+}
+
+.editar-proveedor-button.loading {
+    background: #6c757d;
+    cursor: not-allowed;
+}
+
+.editar-proveedor-error {
+    color: #d93025;
+    margin-top: 10px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.editar-proveedor-loading {
+    text-align: center;
+    margin-top: 50px;
+    font-weight: 500;
+    color: #555;
+}

@@ -1,0 +1,144 @@
+/* src/styles/GestionMesas.css */
+
+.gestion-mesas-container {
+    padding: 30px;
+    background-color: #f9fafb;
+    min-height: 100vh;
+    font-family: "Inter", sans-serif;
+}
+
+.back-link {
+    text-decoration: none;
+    color: #2563eb;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.back-link:hover {
+    color: #1e40af;
+}
+
+.titulo {
+    margin-top: 20px;
+    font-size: 24px;
+    color: #111827;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+.btn-crear {
+    background-color: #16a34a;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.3s ease, transform 0.1s;
+}
+
+.btn-crear:hover {
+    background-color: #15803d;
+    transform: scale(1.02);
+}
+
+.error {
+    color: #dc2626;
+    margin-top: 10px;
+}
+
+.tabla-container {
+    margin-top: 25px;
+    overflow-x: auto;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.tabla-mesas {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+.tabla-mesas th {
+    background-color: #2563eb;
+    color: white;
+    padding: 12px;
+    text-align: left;
+}
+
+.tabla-mesas td {
+    padding: 12px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.tabla-mesas tr:hover {
+    background-color: #f1f5f9;
+}
+
+.acciones {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-editar {
+    background-color: #f59e0b;
+    border: none;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-editar:hover {
+    background-color: #d97706;
+}
+
+.btn-eliminar {
+    background-color: #ef4444;
+    border: none;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-eliminar:hover {
+    background-color: #dc2626;
+}
+
+.estado {
+    font-weight: 600;
+    text-transform: capitalize;
+    padding: 4px 8px;
+    border-radius: 6px;
+}
+
+.estado.disponible {
+    color: #16a34a;
+    background-color: #dcfce7;
+}
+
+.estado.ocupada {
+    color: #b91c1c;
+    background-color: #fee2e2;
+}
+
+.estado.reservada {
+    color: #ca8a04;
+    background-color: #fef9c3;
+}
+
+.estado.mantenimiento {
+    color: #1d4ed8;
+    background-color: #dbeafe;
+}
+
+.loading {
+    text-align: center;
+    margin-top: 50px;
+    font-size: 18px;
+    color: #6b7280;
+}

@@ -1,29 +1,32 @@
-// src/pages/EditarProveedor.jsx
-
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import apiClient from '../services/apiService';
+import '../css/EditarProveedor.css';
 
 function EditarProveedor() {
     const { idProveedor } = useParams();
     const navigate = useNavigate();
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
+
     const [proveedor, setProveedor] = useState({
         nombre: '',
         ruc: '',
         telefono: '',
         correo: '',
-        direccion: ''
+        direccion: '',
     });
 
     useEffect(() => {
         const fetchProveedor = async () => {
+            setLoading(true);
             try {
                 const response = await apiClient.get(`/proveedores/${idProveedor}`);
                 setProveedor(response.data);
-            } catch (err) {
+            } catch {
                 setError('No se pudo cargar el proveedor.');
+            } finally {
+                setLoading(false);
             }
         };
         fetchProveedor();
@@ -36,53 +39,110 @@ function EditarProveedor() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (!proveedor.nombre || !proveedor.ruc) {
+            setError('El nombre y el RUC son obligatorios.');
+            return;
+        }
+
         setLoading(true);
         setError(null);
 
         try {
             await apiClient.put(`/proveedores/${idProveedor}`, proveedor);
-            alert('¡Proveedor actualizado con éxito!');
             navigate('/gestion-proveedores');
-        } catch (err) {
+        } catch {
             setError('Error al actualizar el proveedor.');
-            console.error(err);
         } finally {
             setLoading(false);
         }
     };
 
+    if (loading && !proveedor.nombre) {
+        return <p className="editar-proveedor-loading">Cargando datos del proveedor...</p>;
+    }
+
     return (
-        <div style={{ padding: '20px' }}>
-            <Link to="/gestion-proveedores">{"< Volver a Gestión de Proveedores"}</Link>
-            <h2 style={{ marginTop: '20px' }}>Editar Proveedor (ID: {idProveedor})</h2>
+        <div className="editar-proveedor-container">
+            <Link to="/gestion-proveedores" className="editar-proveedor-back">
+                &lt; Volver a Gestión de Proveedores
+            </Link>
 
-            <form onSubmit={handleSubmit}>
-                <div style={{ marginBottom: '10px' }}>
-                    <label>Nombre:</label><br />
-                    <input type="text" name="nombre" value={proveedor.nombre} onChange={handleChange} required style={{ width: '300px' }} />
-                </div>
-                <div style={{ marginBottom: '10px' }}>
-                    <label>RUC:</label><br />
-                    <input type="text" name="ruc" value={proveedor.ruc} onChange={handleChange} required style={{ width: '300px' }} />
-                </div>
-                <div style={{ marginBottom: '10px' }}>
-                    <label>Teléfono:</label><br />
-                    <input type="text" name="telefono" value={proveedor.telefono} onChange={handleChange} style={{ width: '300px' }} />
-                </div>
-                <div style={{ marginBottom: '10px' }}>
-                    <label>Correo:</label><br />
-                    <input type="email" name="correo" value={proveedor.correo} onChange={handleChange} style={{ width: '300px' }} />
-                </div>
-                <div style={{ marginBottom: '10px' }}>
-                    <label>Dirección:</label><br />
-                    <input type="text" name="direccion" value={proveedor.direccion} onChange={handleChange} style={{ width: '300px' }} />
+            <h2 className="editar-proveedor-title">
+                Editar Proveedor (ID: {idProveedor})
+            </h2>
+
+            <form onSubmit={handleSubmit} className="editar-proveedor-form">
+                <div className="editar-proveedor-group">
+                    <label htmlFor="nombre" className="editar-proveedor-label">Nombre:</label>
+                    <input
+                        id="nombre"
+                        type="text"
+                        name="nombre"
+                        value={proveedor.nombre}
+                        onChange={handleChange}
+                        required
+                        className="editar-proveedor-input"
+                    />
                 </div>
 
-                <button type="submit" disabled={loading} style={{ marginTop: '10px', padding: '10px' }}>
+                <div className="editar-proveedor-group">
+                    <label htmlFor="ruc" className="editar-proveedor-label">RUC:</label>
+                    <input
+                        id="ruc"
+                        type="text"
+                        name="ruc"
+                        value={proveedor.ruc}
+                        onChange={handleChange}
+                        required
+                        className="editar-proveedor-input"
+                    />
+                </div>
+
+                <div className="editar-proveedor-group">
+                    <label htmlFor="telefono" className="editar-proveedor-label">Teléfono:</label>
+                    <input
+                        id="telefono"
+                        type="text"
+                        name="telefono"
+                        value={proveedor.telefono}
+                        onChange={handleChange}
+                        className="editar-proveedor-input"
+                    />
+                </div>
+
+                <div className="editar-proveedor-group">
+                    <label htmlFor="correo" className="editar-proveedor-label">Correo:</label>
+                    <input
+                        id="correo"
+                        type="email"
+                        name="correo"
+                        value={proveedor.correo}
+                        onChange={handleChange}
+                        className="editar-proveedor-input"
+                    />
+                </div>
+
+                <div className="editar-proveedor-group">
+                    <label htmlFor="direccion" className="editar-proveedor-label">Dirección:</label>
+                    <input
+                        id="direccion"
+                        type="text"
+                        name="direccion"
+                        value={proveedor.direccion}
+                        onChange={handleChange}
+                        className="editar-proveedor-input"
+                    />
+                </div>
+
+                <button
+                    type="submit"
+                    disabled={loading}
+                    className={`editar-proveedor-button ${loading ? 'loading' : ''}`}
+                >
                     {loading ? 'Actualizando...' : 'Actualizar Proveedor'}
                 </button>
 
-                {error && <p style={{ color: 'red', marginTop: '10px' }}>{error}</p>}
+                {error && <p className="editar-proveedor-error">{error}</p>}
             </form>
         </div>
     );

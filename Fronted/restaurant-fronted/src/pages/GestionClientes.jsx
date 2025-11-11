@@ -1,88 +1,82 @@
-// src/pages/GestionClientes.jsx
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import apiClient from '../services/apiService';
+import '../css/GestionClientes.css';
 
 function GestionClientes() {
     const [clientes, setClientes] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    const fetchClientes = async () => {
-        try {
-            const response = await apiClient.get('/clientes');
-            setClientes(response.data);
-        } catch (err) {
-            setError('No se pudieron cargar los clientes.');
-            console.error(err);
-        } finally {
-            setLoading(false);
-        }
-    };
-
     useEffect(() => {
+        const fetchClientes = async () => {
+            try {
+                const response = await apiClient.get('/clientes');
+                setClientes(response.data);
+            } catch (err) {
+                setError('No se pudieron cargar los clientes.');
+            } finally {
+                setLoading(false);
+            }
+        };
         fetchClientes();
     }, []);
 
     const handleEliminar = async (idCliente) => {
-        if (window.confirm('¿Estás seguro de que deseas eliminar este cliente?')) {
+        if (window.confirm('¿Estás seguro de eliminar este cliente?')) {
             try {
                 await apiClient.delete(`/clientes/${idCliente}`);
+                setClientes(clientes.filter(c => c.idCliente !== idCliente));
                 alert('Cliente eliminado con éxito.');
-                setClientes(clientes.filter(cliente => cliente.idCliente !== idCliente));
-            } catch (err) {
+            } catch {
                 setError('Error al eliminar el cliente.');
-                console.error(err);
             }
         }
     };
 
-    if (loading) return <p>Cargando clientes...</p>;
+    if (loading) return <p className="loading-text">Cargando clientes...</p>;
 
     return (
-        <div style={{ padding: '20px' }}>
-            <Link to="/dashboard">{"< Volver al Dashboard"}</Link>
-            <h2 style={{ marginTop: '20px' }}>Gestión de Clientes (Admin)</h2>
+        <div className="clientes-container">
+            <Link to="/dashboard" className="back-link">← Volver al Dashboard</Link>
+            <h2 className="clientes-title">Gestión de Clientes (Admin)</h2>
 
             <Link to="/crear-cliente">
-                <button style={{ marginBottom: '20px', padding: '10px', backgroundColor: 'green', color: 'white' }}>
-                    + Crear Cliente Nuevo
-                </button>
+                <button className="btn-create">+ Crear Cliente Nuevo</button>
             </Link>
 
-            {error && <p style={{ color: 'red' }}>{error}</p>}
+            {error && <p className="error-text">{error}</p>}
 
-            <table border="1" style={{ width: '100%', marginTop: '20px', borderCollapse: 'collapse' }}>
+            <table className="clientes-table">
                 <thead>
                     <tr>
-                        <th style={{ padding: '8px' }}>ID</th>
-                        <th style={{ padding: '8px' }}>Nombres</th>
-                        <th style={{ padding: '8px' }}>Apellidos</th>
-                        <th style={{ padding: '8px' }}>DNI</th>
-                        <th style={{ padding: '8px' }}>Teléfono</th>
-                        <th style={{ padding: '8px' }}>Correo</th>
-                        <th style={{ padding: '8px' }}>Estado</th>
-                        <th style={{ padding: '8px' }}>Acciones</th>
+                        <th>ID</th>
+                        <th>Nombres</th>
+                        <th>Apellidos</th>
+                        <th>DNI</th>
+                        <th>Teléfono</th>
+                        <th>Correo</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     {clientes.map(cliente => (
                         <tr key={cliente.idCliente}>
-                            <td style={{ padding: '8px' }}>{cliente.idCliente}</td>
-                            <td style={{ padding: '8px' }}>{cliente.nombres}</td>
-                            <td style={{ padding: '8px' }}>{cliente.apellidos}</td>
-                            <td style={{ padding: '8px' }}>{cliente.dni}</td>
-                            <td style={{ padding: '8px' }}>{cliente.telefono}</td>
-                            <td style={{ padding: '8px' }}>{cliente.correo}</td>
-                            <td style={{ padding: '8px' }}>{cliente.estado ? 'Activo' : 'Inactivo'}</td>
-                            <td style={{ padding: '8px', textAlign: 'center' }}>
+                            <td>{cliente.idCliente}</td>
+                            <td>{cliente.nombres}</td>
+                            <td>{cliente.apellidos}</td>
+                            <td>{cliente.dni}</td>
+                            <td>{cliente.telefono}</td>
+                            <td>{cliente.correo}</td>
+                            <td>{cliente.estado ? 'Activo' : 'Inactivo'}</td>
+                            <td className="actions">
                                 <Link to={`/editar-cliente/${cliente.idCliente}`}>
-                                    <button style={{ marginRight: '5px' }}>Editar</button>
+                                    <button className="btn-edit">Editar</button>
                                 </Link>
-                                <button
-                                    onClick={() => handleEliminar(cliente.idCliente)}
-                                    style={{ backgroundColor: 'red', color: 'white' }}
+                                <button 
+                                    onClick={() => handleEliminar(cliente.idCliente)} 
+                                    className="btn-delete"
                                 >
                                     Eliminar
                                 </button>

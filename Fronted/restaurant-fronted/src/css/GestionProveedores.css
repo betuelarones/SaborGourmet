@@ -1,0 +1,142 @@
+.gpv-container {
+    padding: 28px;
+    background: #f8fafc;
+    min-height: 100vh;
+    font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    color: #0f172a;
+}
+
+.gpv-back {
+    display: inline-block;
+    color: #2563eb;
+    text-decoration: none;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.gpv-back:hover {
+    text-decoration: underline;
+}
+
+.gpv-title {
+    margin-top: 10px;
+    margin-bottom: 18px;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.gpv-create {
+    background: #16a34a;
+    color: white;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: transform .12s ease, background .12s ease;
+}
+
+.gpv-create:hover {
+    transform: translateY(-2px);
+    background: #15803d;
+}
+
+.gpv-error {
+    color: #dc2626;
+    margin-top: 12px;
+}
+
+.gpv-loading,
+.gpv-empty {
+    color: #475569;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.gpv-table-wrap {
+    margin-top: 20px;
+    overflow-x: auto;
+    border-radius: 10px;
+    box-shadow: 0 6px 18px rgba(2, 6, 23, 0.06);
+    background: white;
+}
+
+.gpv-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 720px;
+}
+
+.gpv-table thead th {
+    text-align: left;
+    padding: 14px 16px;
+    background: #0284c7;
+    color: #fff;
+    font-weight: 700;
+}
+
+.gpv-table tbody td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #e2e8f0;
+    vertical-align: middle;
+}
+
+.gpv-table tr:hover td {
+    background: #f1f5f9;
+}
+
+.gpv-name {
+    font-weight: 600;
+}
+
+.gpv-actions {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+
+.gpv-btn {
+    border: none;
+    padding: 8px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.gpv-edit {
+    background: #f59e0b;
+    color: white;
+}
+
+.gpv-edit:hover {
+    background: #d97706;
+}
+
+.gpv-delete {
+    background: #ef4444;
+    color: white;
+}
+
+.gpv-delete:hover {
+    background: #dc2626;
+}
+
+@media (max-width: 760px) {
+    .gpv-table {
+        min-width: 640px;
+    }
+
+    .gpv-title {
+        font-size: 20px;
+    }
+
+    .gpv-create {
+        width: 100%;
+        margin-top: 8px;
+    }
+
+    .gpv-actions {
+        flex-direction: column;
+        gap: 6px;
+    }
+}

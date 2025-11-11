@@ -1,0 +1,422 @@
+/* ========================================
+   CREAR PEDIDO - ESTILOS PROFESIONALES
+   ======================================== */
+
+/* Variables de Color (Usamos la paleta de gestión de mesas/restaurantes) */
+:root {
+    --primary: #3b82f6;
+    --primary-dark: #2563eb;
+    --secondary: #1f2937;
+    --accent-success: #10b981;
+    --danger: #ef4444;
+    --danger-bg: #fee2e2;
+    --bg-main: #f9fafb;
+    --bg-card: #ffffff;
+    --text-primary: #111827;
+    --text-secondary: #6b7280;
+    --border: #e5e7eb;
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* ========================================
+   LAYOUT GENERAL
+   ======================================== */
+
+.crear-pedido-container {
+    min-height: 100vh;
+    background-color: var(--bg-main);
+    padding: 30px 20px;
+}
+
+/* Header */
+.page-header {
+    margin-bottom: 24px;
+    padding: 20px;
+    border-bottom: 2px solid var(--border);
+}
+
+.page-header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 8px 0;
+}
+
+.page-header p {
+    font-size: 15px;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.table-id {
+    color: var(--primary-dark);
+    padding: 4px 10px;
+    background: #e0f2fe;
+    border-radius: 6px;
+}
+
+/* Navegación */
+.crear-pedido-nav {
+    margin-bottom: 20px;
+}
+
+.back-link {
+    /* Estilos del botón Volver, manteniendo coherencia */
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px 15px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+}
+
+.back-link:hover {
+    background-color: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+/* Grid de Contenido Principal (2 Columnas) */
+.pedido-content-grid {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    /* Menú más grande que el resumen */
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* ========================================
+   ESTILOS DE CARDS Y LISTAS
+   ======================================== */
+
+.menu-list-card,
+.resumen-card {
+    background: var(--bg-card);
+    border-radius: 12px;
+    box-shadow: var(--shadow-md);
+    height: fit-content;
+}
+
+.card-header {
+    padding: 20px;
+    border-bottom: 1px solid var(--border);
+}
+
+.card-header h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+/* --- COLUMNA 1: MENÚ --- */
+
+.menu-items-list {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 15px;
+}
+
+.plato-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--bg-main);
+    transition: all 0.2s ease;
+}
+
+.plato-card:hover {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.plato-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.plato-icon {
+    font-size: 24px;
+    flex-shrink: 0;
+}
+
+.plato-name {
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.plato-price {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.btn-add {
+    background: var(--accent-success);
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.btn-add:hover {
+    background: #059669;
+}
+
+/* --- COLUMNA 2: RESUMEN / CARRITO --- */
+
+.resumen-card {
+    padding-bottom: 0;
+    /* Para que el footer se ajuste */
+}
+
+.cliente-select-group {
+    padding: 20px 20px 10px 20px;
+}
+
+.form-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.form-select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--bg-main);
+    font-size: 15px;
+    color: var(--text-primary);
+    appearance: none;
+    /* Quita el estilo nativo en Chrome/Firefox */
+    cursor: pointer;
+}
+
+.form-select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.carrito-list {
+    padding: 10px 20px 20px 20px;
+}
+
+.carrito-list h4 {
+    color: var(--primary);
+    font-size: 16px;
+    margin-bottom: 10px;
+    border-bottom: 1px dashed var(--border);
+    padding-bottom: 5px;
+}
+
+.empty-cart-msg {
+    color: var(--text-secondary);
+    font-style: italic;
+    font-size: 14px;
+    text-align: center;
+}
+
+.cart-ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.item-name-price {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.item-qty {
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.item-name {
+    font-size: 15px;
+    flex-grow: 1;
+}
+
+.item-subtotal {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 14px;
+}
+
+.item-actions {
+    display: flex;
+    gap: 5px;
+}
+
+.btn-action-sm {
+    width: 25px;
+    height: 25px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    background: var(--bg-main);
+    cursor: pointer;
+    font-weight: 700;
+    transition: all 0.2s ease;
+}
+
+.btn-action-sm:hover {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+/* Footer del Pedido (Total y Botón) */
+.pedido-footer {
+    padding: 20px;
+    border-top: 2px solid var(--border);
+    background: #f1f5f9;
+    /* Fondo ligeramente oscuro para destacar */
+    border-radius: 0 0 12px 12px;
+}
+
+.total-display {
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.total-price {
+    font-size: 24px;
+    color: var(--primary-dark);
+    font-weight: 800;
+}
+
+.btn-primary.full-width {
+    width: 100%;
+    padding: 14px;
+    font-size: 16px;
+    /* Usar estilos de botones ya definidos en el ejemplo anterior */
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Mensajes de Error */
+.error-message {
+    background: var(--danger-bg);
+    border-left: 5px solid var(--danger);
+    padding: 12px 18px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: 8px;
+    max-width: 1200px;
+    margin: 0 auto 20px auto;
+}
+
+.error-icon {
+    color: var(--danger);
+    font-size: 20px;
+}
+
+.error-text {
+    color: #991b1b;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* Loading/Error States */
+.loading-state,
+.error-state {
+    text-align: center;
+    padding: 50px;
+    font-size: 18px;
+}
+
+/* Spinner (reutilizado de ejemplo anterior) */
+.spinner {
+    width: 18px;
+    height: 18px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ========================================
+   RESPONSIVE (Para móviles y tabletas)
+   ======================================== */
+
+@media (max-width: 992px) {
+    .pedido-content-grid {
+        grid-template-columns: 1fr;
+        /* Una sola columna en dispositivos pequeños */
+        gap: 20px;
+    }
+
+    .menu-items-list {
+        grid-template-columns: 1fr;
+        /* Una columna para el menú en móviles */
+    }
+}
+
+@media (max-width: 600px) {
+    .crear-pedido-container {
+        padding: 15px 10px;
+    }
+
+    .page-header h1 {
+        font-size: 22px;
+    }
+
+    .pedido-footer {
+        padding: 15px;
+    }
+
+    .total-display {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .total-price {
+        font-size: 20px;
+    }
+}

@@ -1,0 +1,87 @@
+.editar-mesa-container {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 25px;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    font-family: 'Inter', sans-serif;
+}
+
+.editar-mesa-back {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.editar-mesa-back:hover {
+    color: #0056b3;
+}
+
+.editar-mesa-title {
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 25px;
+    color: #333;
+}
+
+.editar-mesa-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.editar-mesa-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.editar-mesa-label {
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.editar-mesa-input,
+.editar-mesa-select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 15px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.editar-mesa-input:focus,
+.editar-mesa-select:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.25);
+}
+
+.editar-mesa-button {
+    margin-top: 10px;
+    padding: 12px;
+    background: #007bff;
+    color: white;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.1s;
+}
+
+.editar-mesa-button:hover {
+    background: #0056b3;
+}
+
+.editar-mesa-button.loading {
+    background: #6c757d;
+    cursor: not-allowed;
+}
+
+.editar-mesa-error {
+    color: #d93025;
+    margin-top: 10px;
+    text-align: center;
+    font-size: 14px;
+}

@@ -1,85 +1,83 @@
-// src/pages/GestionInsumos.jsx
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import apiClient from '../services/apiService';
+import '../css/GestionInsumos.css';
 
 function GestionInsumos() {
     const [insumos, setInsumos] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    const fetchInsumos = async () => {
-        try {
-            const response = await apiClient.get('/insumos');
-            setInsumos(response.data);
-        } catch (err) {
-            setError('No se pudieron cargar los insumos.');
-        } finally {
-            setLoading(false);
-        }
-    };
-
     useEffect(() => {
+        const fetchInsumos = async () => {
+            try {
+                const response = await apiClient.get('/insumos');
+                setInsumos(response.data);
+            } catch {
+                setError('No se pudieron cargar los insumos.');
+            } finally {
+                setLoading(false);
+            }
+        };
         fetchInsumos();
     }, []);
 
     const handleEliminar = async (idInsumo) => {
-        if (window.confirm('¿Estás seguro de que deseas eliminar este insumo?')) {
+        if (window.confirm('¿Estás seguro de eliminar este insumo?')) {
             try {
                 await apiClient.delete(`/insumos/${idInsumo}`);
                 alert('Insumo eliminado con éxito.');
                 setInsumos(insumos.filter(i => i.idInsumo !== idInsumo));
             } catch (err) {
-                // ¡Aquí capturamos tu validación del backend!
                 setError(err.response?.data?.message || 'Error al eliminar el insumo.');
             }
         }
     };
 
-    if (loading) return <p>Cargando insumos...</p>;
+    if (loading) return <p className="loading-text">Cargando insumos...</p>;
 
     return (
-        <div style={{ padding: '20px' }}>
-            <Link to="/dashboard">{"< Volver al Dashboard"}</Link>
-            <h2 style={{ marginTop: '20px' }}>Gestión de Inventario (Insumos)</h2>
+        <div className="insumos-container">
+            <Link to="/dashboard" className="back-link">← Volver al Dashboard</Link>
+            <h2 className="insumos-title">Gestión de Inventario (Insumos)</h2>
 
             <Link to="/crear-insumo">
-                <button style={{ marginBottom: '20px', padding: '10px', backgroundColor: 'green', color: 'white' }}>
-                    + Crear Insumo Nuevo
-                </button>
+                <button className="btn-create">+ Crear Insumo Nuevo</button>
             </Link>
 
-            {error && <p style={{ color: 'red' }}>{error}</p>}
+            {error && <p className="error-text">{error}</p>}
 
-            <table border="1" style={{ width: '100%', marginTop: '20px', borderCollapse: 'collapse' }}>
+            <table className="insumos-table">
                 <thead>
                     <tr>
-                        <th style={{ padding: '8px' }}>ID</th>
-                        <th style={{ padding: '8px' }}>Nombre</th>
-                        <th style={{ padding: '8px' }}>Stock Actual</th>
-                        <th style={{ padding: '8px' }}>Stock Mínimo</th>
-                        <th style={{ padding: '8px' }}>Unidad</th>
-                        <th style={{ padding: '8px' }}>Precio Compra (prom.)</th>
-                        <th style={{ padding: '8px' }}>Acciones</th>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Stock Actual</th>
+                        <th>Stock Mínimo</th>
+                        <th>Unidad</th>
+                        <th>Precio Compra (Prom.)</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     {insumos.map(insumo => (
-                        <tr key={insumo.idInsumo} style={{ backgroundColor: insumo.stock < insumo.stockMinimo ? '#ffcccc' : 'transparent' }}>
-                            <td style={{ padding: '8px' }}>{insumo.idInsumo}</td>
-                            <td style={{ padding: '8px' }}>{insumo.nombre}</td>
-                            <td style={{ padding: '8px', fontWeight: 'bold' }}>{insumo.stock}</td>
-                            <td style={{ padding: '8px' }}>{insumo.stockMinimo}</td>
-                            <td style={{ padding: '8px' }}>{insumo.unidadMedida}</td>
-                            <td style={{ padding: '8px' }}>S/ {insumo.precioCompra}</td>
-                            <td style={{ padding: '8px', textAlign: 'center' }}>
+                        <tr
+                            key={insumo.idInsumo}
+                            className={insumo.stock < insumo.stockMinimo ? 'low-stock' : ''}
+                        >
+                            <td>{insumo.idInsumo}</td>
+                            <td>{insumo.nombre}</td>
+                            <td className="stock-value">{insumo.stock}</td>
+                            <td>{insumo.stockMinimo}</td>
+                            <td>{insumo.unidadMedida}</td>
+                            <td>S/ {insumo.precioCompra}</td>
+                            <td className="actions">
                                 <Link to={`/editar-insumo/${insumo.idInsumo}`}>
-                                    <button style={{ marginRight: '5px' }}>Editar</button>
+                                    <button className="btn-edit">Editar</button>
                                 </Link>
                                 <button
                                     onClick={() => handleEliminar(insumo.idInsumo)}
-                                    style={{ backgroundColor: 'red', color: 'white' }}
+                                    className="btn-delete"
                                 >
                                     Eliminar
                                 </button>

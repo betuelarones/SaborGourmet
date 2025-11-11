@@ -1,0 +1,121 @@
+.clientes-container {
+    padding: 20px;
+    background-color: #f9fafb;
+    min-height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.back-link {
+    color: #1d4ed8;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+.clientes-title {
+    margin-top: 20px;
+    color: #111827;
+    font-size: 1.5rem;
+}
+
+.btn-create {
+    margin: 20px 0;
+    padding: 10px 15px;
+    background-color: #16a34a;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-create:hover {
+    background-color: #15803d;
+}
+
+.error-text {
+    color: red;
+    margin-bottom: 10px;
+}
+
+.loading-text {
+    color: #374151;
+    text-align: center;
+    font-weight: 500;
+}
+
+.clientes-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.clientes-table th,
+.clientes-table td {
+    padding: 10px 12px;
+    text-align: center;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.clientes-table th {
+    background-color: #f3f4f6;
+    color: #374151;
+    font-weight: 600;
+}
+
+.actions {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-edit,
+.btn-delete {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.btn-edit {
+    background-color: #2563eb;
+    color: white;
+}
+
+.btn-edit:hover {
+    background-color: #1e40af;
+}
+
+.btn-delete {
+    background-color: #dc2626;
+    color: white;
+}
+
+.btn-delete:hover {
+    background-color: #b91c1c;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .clientes-table th, .clientes-table td {
+        padding: 8px;
+        font-size: 0.85rem;
+    }
+
+    .btn-create {
+        width: 100%;
+    }
+
+    .actions {
+        flex-direction: column;
+        gap: 6px;
+    }
+}

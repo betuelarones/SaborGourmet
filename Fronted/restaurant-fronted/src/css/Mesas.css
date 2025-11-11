@@ -1,0 +1,90 @@
+/* 🌿 src/css/Mesas.css */
+
+.mesas-container {
+    padding: 30px;
+    background-color: #f8fafc;
+    min-height: 100vh;
+    font-family: 'Poppins', sans-serif;
+}
+
+.mesas-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+
+.mesas-header a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.mesas-header a:hover {
+    color: #0056b3;
+}
+
+.mesas-title {
+    font-size: 28px;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.mesas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 20px;
+}
+
+.mesa-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e5e7eb;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.mesa-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+    border-color: #10b981;
+}
+
+.mesa-card strong {
+    font-size: 20px;
+    color: #059669;
+}
+
+.mesa-card p {
+    margin: 8px 0;
+    color: #4b5563;
+    font-size: 15px;
+}
+
+/* Estado de mesas */
+.mesa-card .estado-disponible {
+    color: #16a34a;
+    font-weight: 600;
+}
+
+.mesa-card .estado-ocupada {
+    color: #dc2626;
+    font-weight: 600;
+}
+
+.mesa-card .estado-reservada {
+    color: #ca8a04;
+    font-weight: 600;
+}
+
+/* Mensaje cuando no hay mesas */
+.mesas-empty {
+    text-align: center;
+    color: #6b7280;
+    font-size: 16px;
+    margin-top: 40px;
+}

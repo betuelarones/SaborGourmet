@@ -1,8 +1,7 @@
-// src/pages/GestionPlatos.jsx
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import apiClient from '../services/apiService';
+import '../css/GestionPlatos.css';
 
 function GestionPlatos() {
     const [platos, setPlatos] = useState([]);
@@ -27,18 +26,11 @@ function GestionPlatos() {
     }, []);
 
     const handleEliminar = async (idPlato) => {
-        // 1. Pedimos confirmación
         if (window.confirm('¿Estás seguro de que deseas eliminar este plato?')) {
             try {
-                // 2. Llamamos al backend
                 await apiClient.delete(`/platos/${idPlato}`);
-
                 alert('Plato eliminado con éxito.');
-
-                // 3. Actualizamos la lista en el frontend (sin recargar la página)
-                //    Simplemente, filtramos el plato eliminado del estado 'platos'
                 setPlatos(platos.filter(plato => plato.idPlato !== idPlato));
-
             } catch (err) {
                 setError('Error al eliminar el plato.');
                 console.error(err);
@@ -46,55 +38,62 @@ function GestionPlatos() {
         }
     };
 
-    if (loading) return <p>Cargando platos...</p>;
+    if (loading) return <p className="gp-loading">Cargando platos...</p>;
 
     return (
-        <div style={{ padding: '20px' }}>
-            <Link to="/dashboard">{"< Volver al Dashboard"}</Link>
-            <h2 style={{ marginTop: '20px' }}>Gestión de Platos (Admin)</h2>
+        <div className="gp-container">
+            <Link to="/dashboard" className="gp-back">&lt; Volver al Dashboard</Link>
+            <h2 className="gp-title">Gestión de Platos (Admin)</h2>
 
             <Link to="/crear-plato">
-                <button style={{ marginBottom: '20px', padding: '10px', backgroundColor: 'green', color: 'white' }}>
-                    + Crear Plato Nuevo
-                </button>
+                <button className="gp-create">+ Crear Plato Nuevo</button>
             </Link>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
 
-            <table border="1" style={{ width: '100%', marginTop: '20px', borderCollapse: 'collapse' }}>
-                <thead>
-                    <tr>
-                        <th style={{ padding: '8px' }}>ID</th>
-                        <th style={{ padding: '8px' }}>Nombre</th>
-                        <th style={{ padding: '8px' }}>Precio</th>
-                        <th style={{ padding: '8px' }}>Tipo</th>
-                        <th style={{ padding: '8px' }}>Estado</th>
-                        <th style={{ padding: '8px' }}>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {platos.map(plato => (
-                        <tr key={plato.idPlato}>
-                            <td style={{ padding: '8px' }}>{plato.idPlato}</td>
-                            <td style={{ padding: '8px' }}>{plato.nombre}</td>
-                            <td style={{ padding: '8px' }}>S/ {plato.precio}</td>
-                            <td style={{ padding: '8px' }}>{plato.tipo}</td>
-                            <td style={{ padding: '8px' }}>{plato.estado}</td>
-                            <td style={{ padding: '8px', textAlign: 'center' }}>
-                                <Link to={`/editar-plato/${plato.idPlato}`}>
-                                    <button>Editar</button>
-                                </Link>
-                                <button onClick={() => handleEliminar(plato.idPlato)}
-                                    style={{ backgroundColor: 'red', color: 'white' }}>
-                                    Eliminar
-                                </button>
-                            </td>
+            {error && <p className="gp-error">{error}</p>}
+
+            <div className="gp-table-wrap">
+                <table className="gp-table" role="table" aria-label="Lista de platos">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Precio</th>
+                            <th>Tipo</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {platos.map(plato => (
+                            <tr key={plato.idPlato}>
+                                <td>{plato.idPlato}</td>
+                                <td className="gp-name">{plato.nombre}</td>
+                                <td>S/ {plato.precio}</td>
+                                <td>{plato.tipo}</td>
+                                <td>
+                                    <span className={`gp-status ${String(plato.estado).toLowerCase()}`}>
+                                        {plato.estado}
+                                    </span>
+                                </td>
+                                <td className="gp-actions">
+                                    <Link to={`/editar-plato/${plato.idPlato}`}>
+                                        <button className="gp-btn gp-edit">Editar</button>
+                                    </Link>
+                                    <button
+                                        onClick={() => handleEliminar(plato.idPlato)}
+                                        className="gp-btn gp-delete"
+                                    >
+                                        Eliminar
+                                    </button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
 
             {platos.length === 0 && !loading && (
-                <p>No hay platos registrados.</p>
+                <p className="gp-empty">No hay platos registrados.</p>
             )}
         </div>
     );
