@@ -7,6 +7,7 @@ import com.tecsup.semana12.model.Usuario;
 import java.util.List;
 
 public interface UsuarioService {
+
     // RF16: Registrar usuario (usado por el AuthController)
     Usuario registrarUsuario(RegisterRequestDTO registerRequest);
 
@@ -18,4 +19,5 @@ public interface UsuarioService {
     void eliminarUsuario(Long id);
 
     Usuario actualizarUsuario(Long id, UsuarioUpdateDTO usuarioUpdateDTO);
+
 }

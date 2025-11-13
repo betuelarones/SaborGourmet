@@ -94,6 +94,12 @@ function Dashboard() {
                                     </Link>
                                 </li>
                                 <li className="nav-item">
+                                    <Link to="/gestion-usuarios" className="nav-link">
+                                        <span className="nav-icon">👤</span>
+                                        <span>Usuarios </span>
+                                    </Link>
+                                </li>
+                                <li className="nav-item">
                                     <Link to="/gestion-mesas" className="nav-link">
                                         <span className="nav-icon">🪑</span>
                                         <span>Mesas</span>
@@ -318,6 +324,19 @@ function Dashboard() {
                                                     <h3>Proveedores</h3>
                                                     <p className="card-description">
                                                         Gestionar proveedores e insumos
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <span className="card-badge">Admin</span>
+                                        </Link>
+
+                                        <Link to="/gestion-usuarios" className="dashboard-card">
+                                            <div className="card-header">
+                                                <div className="card-icon warning">👤</div>
+                                                <div className="card-content">
+                                                    <h3>Usuarios</h3>
+                                                    <p className="card-description">
+                                                        Gestionar Usuarios y roles
                                                     </p>
                                                 </div>
                                             </div>

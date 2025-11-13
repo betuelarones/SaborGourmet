@@ -36,6 +36,8 @@ import AlertasStock from './pages/AlertasStock';
 import ReporteVentas from './pages/ReporteVentas';
 
 import RegistrarCompra from './pages/RegistrarCompra';
+
+import GestionUsuarios from './pages/GestionUsuarios';
 // Define las rutas
 
 const router = createBrowserRouter([
@@ -98,7 +100,8 @@ const router = createBrowserRouter([
       { path: "/reporte-ventas", element: <ReporteVentas /> },
 
       { path: "/registrar-compra", element: <RegistrarCompra /> },
-
+      
+      { path: "/gestion-usuarios", element: <GestionUsuarios /> },
     ]
   }
 ]);
